@@ -43,13 +43,6 @@ class CarController {
         this.assembler = assembler;
     }
 
-//    private CarService carService;
-//
-//    @Autowired
-//    public void setCarService(CarService carService) {
-//        this.carService = carService;
-//    }
-
     /**
      * Creates a list to store any vehicles.
      *
@@ -62,18 +55,6 @@ class CarController {
         return new Resources<>(resources,
                 linkTo(methodOn(CarController.class).list()).withSelfRel());
     }
-//    @GetMapping
-//    public ResponseEntity<List<Car>> getAllCars() {
-//        List<Car> list = carService.list();
-//        return new ResponseEntity<List<Car>>(list, HttpStatus.OK);
-//
-////        return repository.findAll().stream()
-////                .peek(car -> {
-////                    car.setLocation(mapsClient.getAddress(car.getLocation()));
-////                    car.setPrice(priceClient.getPrice(car.getId()));
-////                })
-////                .collect(Collectors.toList());
-//    }
 
     /**
      * Gets information of a specific car by ID.
@@ -91,12 +72,6 @@ class CarController {
         //return assembler.toResource(new Car());
         return assembler.toResource(this.carService.findById(id));
     }
-//    @GetMapping("/{id}")
-//    public ResponseEntity<Car> getCarById(@PathVariable Long id) {
-//        Car car = new Car();
-//        car = carService.findById(id);
-//        return ResponseEntity.ok(car);
-//    }
 
     /**
      * Posts information to create a new vehicle in the system.
@@ -115,11 +90,6 @@ class CarController {
         Resource<Car> resource = this.assembler.toResource(this.carService.save(car));
         return ResponseEntity.created(new URI(resource.getId().expand().getHref())).body(resource);
     }
-//    @PostMapping
-//    ResponseEntity<?> post(@Valid @RequestBody Car car) {
-//        carService.save(car);
-//        return ResponseEntity.ok(car);
-//    }
 
     /**
      * Updates the information of a vehicle in the system.
@@ -140,12 +110,6 @@ class CarController {
         Resource<Car> resource = this.assembler.toResource(this.carService.save(car));
         return ResponseEntity.ok(resource);
     }
-//    @PutMapping("/{id}")
-//    public ResponseEntity<?> put(@PathVariable Long id, @Valid @RequestBody Car car) {
-//        car.setId(id);
-//        carService.update(car);
-//        return ResponseEntity.ok(car);
-//    }
 
     /**
      * Removes a vehicle from the system.
